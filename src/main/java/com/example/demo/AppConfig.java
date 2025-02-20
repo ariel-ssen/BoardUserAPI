@@ -1,6 +1,5 @@
 package com.example.demo;
 
-// AppConfig.java (선택, RestTemplate Bean 주입)
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
