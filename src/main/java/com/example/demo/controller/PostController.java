@@ -5,7 +5,7 @@ import com.example.demo.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -17,9 +17,9 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto,
-                                              @RequestParam(required = false, defaultValue = "111121") String msradmCode) {
+                                              @RequestParam(required = false, defaultValue = "111121") String msradmCode, URI location) {
         PostDto createdPost = postService.createPost(postDto, msradmCode);
-        return ResponseEntity.ok(createdPost);
+        return ResponseEntity.created(location).body(createdPost);
     }
 
 
