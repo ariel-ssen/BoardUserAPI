@@ -15,35 +15,32 @@ public class PostController {
 
     private final PostService postService;
 
-    // 게시글 생성
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
-        PostDto createdPost = postService.createPost(postDto);
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto,
+                                              @RequestParam(required = false, defaultValue = "111121") String msradmCode) {
+        PostDto createdPost = postService.createPost(postDto, msradmCode);
         return ResponseEntity.ok(createdPost);
     }
 
-    // 게시글 조회 (단건)
+
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPost(@PathVariable Long id) {
         PostDto post = postService.getPost(id);
         return ResponseEntity.ok(post);
     }
 
-    // 게시글 조회 (페이징)
     @GetMapping
     public ResponseEntity<List<PostDto>> getPosts(@RequestParam int page, @RequestParam int size) {
         List<PostDto> posts = postService.getPosts(page, size);
         return ResponseEntity.ok(posts);
     }
 
-    // 게시글 수정
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePost(@PathVariable Long id, @RequestBody PostDto postDto) {
         PostDto updatedPost = postService.updatePost(id, postDto);
         return ResponseEntity.ok(updatedPost);
     }
 
-    // 게시글 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         postService.deletePost(id);
